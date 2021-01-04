@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mathaday_app/questions.dart';
+import 'questions.dart';
 
 ///im not mark zuckerberg im not stealing ur data lol
 class UserData {

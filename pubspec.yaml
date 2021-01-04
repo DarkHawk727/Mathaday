@@ -21,6 +21,10 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  flutter_tex: ^3.6.7+10
+  math_tex: ^0.0.3
+  fluttex: ^0.0.2
+  katex_flutter: ^4.0.1
   flutter_math: ^0.2.1
   fl_chart: ^0.12.2
   flutter:

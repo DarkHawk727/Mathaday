@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_math/flutter_math.dart';
-import 'package:mathaday_app/home.dart';
-import 'package:mathaday_app/profile.dart';
-import 'questions.dart';
-import 'renderquestion.dart';
+import 'home.dart';
+import 'profile.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,6 +10,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mathaday',
+      theme: ThemeData(
+        textTheme: TextTheme(
+          bodyText1: TextStyle(color: Colors.white)
+        )
+      ),
       home: MyStatefulWidget(),
     );
   }

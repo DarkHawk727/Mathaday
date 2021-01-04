@@ -1,30 +1,44 @@
-import 'package:flutter/cupertino.dart';
-import 'questions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_math/flutter_math.dart';
-import 'package:flutter_math/tex.dart';
+import 'questions.dart';
+import 'latex.dart';
 
-Widget renderShortans(QuestionData question) {
-  final eq = Math.tex(question.question,
-      textStyle: TextStyle(fontSize: 20, color: Colors.white),
-      mathStyle: MathStyle.text);
-  return Padding(
+class QuestionCard extends StatefulWidget {
+  QuestionCard(this.question);
+  final QuestionData question;
+
+  @override
+  _QuestionCardState createState() => _QuestionCardState(question);
+}
+
+class _QuestionCardState extends State<QuestionCard> {
+  _QuestionCardState(this.question);
+  final QuestionData question;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
         color: Colors.grey[800],
         child: Column(
           children: [
             Expanded(
-              child: ListView(children: [
-                Padding(
+              child: ListView(
+                children: [
+                  Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Center(
-                      child: Math.tex(question.question,
-                          textStyle:
-                              TextStyle(fontSize: 20, color: Colors.white),
-                          mathStyle: MathStyle.text),
-                    )),
-              ]),
+                      child: LaTex(
+                        question.question, 
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white
+                        )
+                      )
+                    )
+                  ),
+                ]
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -35,5 +49,7 @@ Widget renderShortans(QuestionData question) {
             )
           ],
         ),
-      ));
+      )
+    );
+  }
 }

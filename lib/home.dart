@@ -10,9 +10,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var examples = [
     new ShortAnswer(
-        r'\begin{aligned}\text{If } (2^4)(3^6)=9(6^x) \text{, what is the value }\\ \text{of } x\text{?} \end{aligned}'),
+        r'$ If $ (2^4)(3^6)=9(6^x) $, what is the value of $ x $ ? $'),
     new ShortAnswer(
-        r'\text{If }2x^2=9x-4 \text{ and } x\ne4 \text{ then the value of }2x \text{ is?}')
+        r'$ If $ 2x^2=9x-4 $ and $ x $ then the value of $ 2x $ is? $')
   ];
   List<Widget> exampleCards = [];
 
@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   void setupCards() {
     setState(() {
       for (ShortAnswer example in examples) {
-        exampleCards.add(renderShortans(example));
+        exampleCards.add(QuestionCard(example));
       }
     });
   }
