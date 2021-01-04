@@ -31,9 +31,23 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: PageView(children: exampleCards),
-      height: 350,
+    return ListView(
+      children: [
+        Container(
+          child: PageView(children: exampleCards),
+          height: 350,
+        ),
+        MaterialButton(
+          onPressed: (){},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('New Questions', style: TextStyle(color: Colors.white)),
+              Icon(Icons.casino_outlined, color: Colors.white)
+            ]
+          )
+        )
+      ],
     );
   }
 }

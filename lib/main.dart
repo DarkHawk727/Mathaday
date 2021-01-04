@@ -28,7 +28,7 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
-  List<Widget> _views = [Home(), Home(), Profile()];
+  List<Widget> _views = [Home(), Profile()];
   int _selectedIndex = 0;
 
   void _onItemTap(int index) {

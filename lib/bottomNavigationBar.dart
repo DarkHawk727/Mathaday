@@ -17,10 +17,6 @@ class HomeNavBar extends StatelessWidget {
               label: 'Home',
               backgroundColor: Colors.black),
           BottomNavigationBarItem(
-              icon: Icon(Icons.casino),
-              label: 'New Questions',
-              backgroundColor: Colors.black),
-          BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Profile',
               backgroundColor: Colors.red),
