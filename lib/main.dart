@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mathaday_app/bottomNavigationBar.dart';
+import 'package:mathaday_app/drawer.dart';
 import 'home.dart';
 import 'profile.dart';
 
 void main() => runApp(MyApp());
 
-/// This is the main application widget.
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,25 +16,22 @@ class MyApp extends StatelessWidget {
           bodyText1: TextStyle(color: Colors.white)
         )
       ),
-      home: MyStatefulWidget(),
+      home: Main(),
     );
   }
 }
 
-/// This is the stateful widget that the main application instantiates.
-class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key}) : super(key: key);
+class Main extends StatefulWidget {
 
   @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+  _MainState createState() => _MainState();
 }
 
-/// This is the private State class that goes with MyStatefulWidget.
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _MainState extends State<Main> {
   List<Widget> _views = [Home(), Home(), Profile()];
   int _selectedIndex = 0;
 
-  void onItemTap(int index) {
+  void _onItemTap(int index) {
     setState(() => _selectedIndex = index);
   }
 
@@ -44,34 +42,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         title: const Text('Mathaday'),
         backgroundColor: Colors.red[800],
       ),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.grey[850],
-          child: Column(
-            children: [],
-          ),
-        ),
-      ),
+      drawer: HomeDrawer(),
       body: _views.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.red[800],
-        currentIndex: _selectedIndex,
-        onTap: onItemTap,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.black),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.casino),
-              label: 'New Questions',
-              backgroundColor: Colors.black),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-              backgroundColor: Colors.red),
-        ],
-      ),
+      bottomNavigationBar: HomeNavBar(_onItemTap, _selectedIndex)
     );
   }
 }

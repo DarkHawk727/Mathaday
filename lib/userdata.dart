@@ -12,4 +12,12 @@ class UserData {
   String favoriteTopic1 = '';
   String favoriteTopic2 = '';
   List<QuestionData> previousQuestions = [];
+
+  void calculateData(){
+    _calculateAverageDailyScore();
+  }
+
+  void _calculateAverageDailyScore(){
+
+  }
 }
