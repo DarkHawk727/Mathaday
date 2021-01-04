@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Mathaday',
       theme: ThemeData(
         textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white)
+          bodyText1: TextStyle(color: Colors.white),
         )
       ),
       home: Main(),
