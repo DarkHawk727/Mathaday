@@ -8,18 +8,20 @@ class QuestionData {
   List<String> primaryTopics = [];
   List<String> secondaryTopics = [];
   DateTime completiondate = DateTime.utc(0);
+  String answer = '';
   bool completion = false;
   bool correct = false;
 
-  bool answered(String answer, notify){
-    correct = _check(answer);
+  bool answered(String response, notify){
+    correct = _check(response);
+    answer = response;
     completion = true;
     _addToPrevious();
     homeQuestions.remove(this, notify);
     return correct;
   }
 
-  bool _check(String answer){
+  bool _check(String response){
     return true;
   }
 
