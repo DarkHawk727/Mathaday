@@ -7,6 +7,10 @@ class QuestionData {
   bool completion = false;
   bool correct = false;
 
+  bool check(String response){
+    return true;
+  }
+
   QuestionData.data(data){
     this.question = data['question'];
     this.source = data['source'];
@@ -24,7 +28,14 @@ class ShortAnswer extends QuestionData {
 class MultipleChoice extends QuestionData {
   Map<String, bool> options = {};
   MultipleChoice(String question) : super(question);
-  MultipleChoice.data(data) : super.data(data);
+  MultipleChoice.data(data) : 
+    options = Map<String, bool>.from(data['options']),
+    super.data(data);
+  
+  bool check(String option){
+    print(options[option]);
+    return options[option];
+  }
 }
 
 QuestionData createQuestion(Map<String, dynamic> data){

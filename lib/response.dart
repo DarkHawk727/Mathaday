@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:mathaday_app/latex.dart';
 import 'questions.dart';
 
 class Response extends StatefulWidget {
+  Response(this.question);
+  final QuestionData question;
+
   @override
-  _ResponseState createState() => _ResponseState();
+  _ResponseState createState() => _ResponseState(question);
 }
 
 class _ResponseState extends State<Response> {
+  _ResponseState(this.question);
+  final QuestionData question;
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    if(question is MultipleChoice) return MultipleChoiceResponse(question);
+    return Container(child: TextField());
   }
 }
 
@@ -24,31 +32,36 @@ class MultipleChoiceResponse extends StatefulWidget {
 class _MultipleChoiceResponseState extends State<MultipleChoiceResponse> {
   _MultipleChoiceResponseState(this.question);
   final MultipleChoice question;
-  List<Widget> optionWidgets = [];
+  List<Widget> _optionWidgets = [];
 
   @override
   void initState(){
     super.initState();
-
+    _setOptionWidgets();
   }
 
   _setOptionWidgets(){
-    question.options.forEach((key, value) {
-      optionWidgets.add(
-        
-      );
+    setState(() {
+      question.options.entries.forEach((option) {
+        _optionWidgets.add(_createOptionWidget(option.key));
+      });
     });
   }
 
   Widget _createOptionWidget(String option){
-    return RaisedButton(
-      
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: RaisedButton(
+        onPressed: () => question.check(option),
+        child: LaTex(option),
+      ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      
+    return Wrap(
+      children: _optionWidgets,
     );
   }
 }

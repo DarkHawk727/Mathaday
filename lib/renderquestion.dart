@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathaday_app/response.dart';
 import 'questions.dart';
 import 'latex.dart';
 
@@ -31,7 +32,7 @@ class _QuestionCardState extends State<QuestionCard> {
                       child: LaTex(
                         question.question, 
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 22,
                           color: Colors.white
                         )
                       )
@@ -40,6 +41,7 @@ class _QuestionCardState extends State<QuestionCard> {
                 ]
               ),
             ),
+            Response(question),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
