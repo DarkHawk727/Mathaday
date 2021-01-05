@@ -11,13 +11,12 @@ class UserData {
   int longestStreak = 0;
   String favoriteTopic1 = '';
   String favoriteTopic2 = '';
+  double xp = 0.0;
   List<QuestionData> previousQuestions = [];
 
-  void calculateData(){
+  void calculateData() {
     _calculateAverageDailyScore();
   }
 
-  void _calculateAverageDailyScore(){
-
-  }
+  void _calculateAverageDailyScore() {}
 }
