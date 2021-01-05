@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "518568198519",
+    "project_id": "mathaday-c3104",
+    "storage_bucket": "mathaday-c3104.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518568198519:android:1c8608e1c62bc873966172",
+        "android_client_info": {
+          "package_name": "app.mathaday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518568198519-hdtrchoft58ice1c5t19th0lai3sokmm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYcaDTGxx6yp-2rrTrAhYFOeHxAa9Xq5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518568198519-hdtrchoft58ice1c5t19th0lai3sokmm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "518568198519-cmkadfie5u9a02aotcob6pq4hfs548q3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.mathaday"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
