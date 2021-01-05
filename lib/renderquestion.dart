@@ -38,10 +38,10 @@ class _QuestionCardState extends State<QuestionCard> {
                       )
                     )
                   ),
+                  Center(child: Response(question)),
                 ]
               ),
             ),
-            Response(question),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(

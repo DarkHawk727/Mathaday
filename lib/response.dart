@@ -52,7 +52,7 @@ class _MultipleChoiceResponseState extends State<MultipleChoiceResponse> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
-        onPressed: () => question.check(option),
+        onPressed: () => question.answered(option),
         child: LaTex(option),
       ),
     );

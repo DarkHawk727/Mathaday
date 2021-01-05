@@ -19,3 +19,5 @@ class UserData {
 
   void _calculateAverageDailyScore() {}
 }
+
+UserData userData = UserData();

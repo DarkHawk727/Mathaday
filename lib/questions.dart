@@ -1,3 +1,5 @@
+import 'package:mathaday_app/userdata.dart';
+
 class QuestionData {
   String question = '';
   String source = '';
@@ -8,8 +10,19 @@ class QuestionData {
   bool completion = false;
   bool correct = false;
 
-  bool check(String response){
+  bool answered(String answer){
+    correct = _check(answer);
+    completion = true;
+    _addToPrevious();
+    return correct;
+  }
+
+  bool _check(String answer){
     return true;
+  }
+
+  void _addToPrevious(){
+    userData.previousQuestions.add(this);
   }
 
   QuestionData.data(data){
@@ -19,6 +32,7 @@ class QuestionData {
     this.secondaryTopics = data['secondaryTopics'];
     this.grade = data['grade'];
   }
+
   QuestionData(this.question);
 }
 
@@ -34,11 +48,12 @@ class MultipleChoice extends QuestionData {
     options = Map<String, bool>.from(data['options']),
     super.data(data);
   
-  bool check(String option){
-    print(options[option]);
+  bool _check(String option){
     return options[option];
   }
 }
+
+
 
 QuestionData createQuestion(Map<String, dynamic> data){
   if(data.containsKey('options')) return MultipleChoice.data(data);
