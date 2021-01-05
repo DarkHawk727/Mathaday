@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:mathaday_app/response.dart';
 import 'questions.dart';
 import 'latex.dart';
+import 'homeQuestions.dart';
 
 class QuestionCard extends StatefulWidget {
-  QuestionCard(this.question);
+  QuestionCard(this.question, this.notify);
   final QuestionData question;
+  final Function notify;
 
   @override
-  _QuestionCardState createState() => _QuestionCardState(question);
+  _QuestionCardState createState() => _QuestionCardState(question, notify);
 }
 
 class _QuestionCardState extends State<QuestionCard> {
-  _QuestionCardState(this.question);
+  _QuestionCardState(this.question, this.notify);
   final QuestionData question;
+  final Function notify;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class _QuestionCardState extends State<QuestionCard> {
                       )
                     )
                   ),
-                  Center(child: Response(question)),
+                  Center(child: Response(question, notify)),
                 ]
               ),
             ),

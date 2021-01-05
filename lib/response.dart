@@ -3,35 +3,39 @@ import 'package:mathaday_app/latex.dart';
 import 'questions.dart';
 
 class Response extends StatefulWidget {
-  Response(this.question);
+  Response(this.question, this.notify);
   final QuestionData question;
+  final Function notify;
 
   @override
-  _ResponseState createState() => _ResponseState(question);
+  _ResponseState createState() => _ResponseState(question, notify);
 }
 
 class _ResponseState extends State<Response> {
-  _ResponseState(this.question);
+  _ResponseState(this.question, this.notify);
   final QuestionData question;
+  final Function notify;
 
   @override
   Widget build(BuildContext context) {
-    if(question is MultipleChoice) return MultipleChoiceResponse(question);
+    if(question is MultipleChoice) return MultipleChoiceResponse(question, notify);
     return Container(child: TextField());
   }
 }
 
 class MultipleChoiceResponse extends StatefulWidget {
-  MultipleChoiceResponse(this.question);
+  MultipleChoiceResponse(this.question, this.notify);
   final MultipleChoice question;
+  final Function notify;
 
   @override
-  _MultipleChoiceResponseState createState() => _MultipleChoiceResponseState(question);
+  _MultipleChoiceResponseState createState() => _MultipleChoiceResponseState(question, notify);
 }
 
 class _MultipleChoiceResponseState extends State<MultipleChoiceResponse> {
-  _MultipleChoiceResponseState(this.question);
+  _MultipleChoiceResponseState(this.question, this.notify);
   final MultipleChoice question;
+  final Function notify;
   List<Widget> _optionWidgets = [];
 
   @override
@@ -52,7 +56,9 @@ class _MultipleChoiceResponseState extends State<MultipleChoiceResponse> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
-        onPressed: () => question.answered(option),
+        onPressed: (){
+          question.answered(option, notify);
+        },
         child: LaTex(option),
       ),
     );

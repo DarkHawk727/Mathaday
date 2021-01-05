@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'renderquestion.dart';
 import 'homeQuestions.dart';
 
 class Home extends StatefulWidget {
@@ -7,8 +8,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  HomeQuestions _homeQuestions = HomeQuestions();
-  List<Widget> _questionCards = [];
 
   void initState() {
     super.initState();
@@ -16,16 +15,37 @@ class _HomeState extends State<Home> {
   }
 
   setupCards() async {
-    _questionCards = await _homeQuestions.getCards();
-    setState(() => _questionCards);
+    await homeQuestions.getCards(update);
+  }
+
+  update(){
+    setState(() => homeQuestions.questions);
+    setState(() {
+      
+    });
+    print(homeQuestions.questions.map((e) => e.question));
   }
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return ListView(
       children: [
         Container(
-          child: PageView(children: _questionCards),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: homeQuestions.questions.length,
+            itemBuilder: (BuildContext builder, int index){
+              return Dismissible(
+                direction: DismissDirection.vertical,
+                key: Key(homeQuestions.questions[index].question),
+                child: Container(
+                  width: width,
+                  child: QuestionCard(homeQuestions.questions[index], update)
+                )
+              );
+            },
+          ),
           height: 350,
         ),
         MaterialButton(

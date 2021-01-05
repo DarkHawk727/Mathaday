@@ -3,6 +3,10 @@ import 'package:mathaday_app/userdata.dart';
 import 'renderquestion.dart';
 
 class HomeDrawer extends StatelessWidget {
+  update(){
+    //setState((){});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -10,7 +14,7 @@ class HomeDrawer extends StatelessWidget {
         color: Colors.grey[850],
         child: ListView(
           children: <Widget>[] + userData.previousQuestions.reversed.map((e) => Container(
-            child: QuestionCard(e),
+            child: QuestionCard(e, update),
             height: 400,
           )).toList(),
         ),

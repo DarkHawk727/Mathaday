@@ -1,3 +1,5 @@
+import 'package:mathaday_app/userdata.dart';
+
 import 'questions.dart';
 import 'renderquestion.dart';
 import 'firestore.dart';
@@ -5,7 +7,6 @@ import 'package:flutter/material.dart';
 
 class HomeQuestions{
   List<QuestionData> questions = [];
-
   List<Widget> questionCards = [];
 
   Future<List<QuestionData>> _loadData() async {
@@ -14,14 +15,25 @@ class HomeQuestions{
     return _questions.map((e) => createQuestion(e)).toList();
   }
 
-  Future<List<Widget>> getCards() async {
-    await _generateCards();
-    return questionCards;
+  getCards(Function notify) async {
+    this.questions = await _loadData();
+    _cardsFromData(notify);
   }
 
-  _generateCards() async {
-    questionCards.clear();
-    questions = await _loadData();
-    for(QuestionData question in questions) questionCards.add(QuestionCard(question));
+  _cardsFromData(notify){
+    this.questionCards.clear();
+    for(QuestionData question in questions) this.questionCards.add(QuestionCard(question, notify));
+    notify();
+  }
+
+  add(List<QuestionData> questions){
+    questions.addAll(questions);
+  }
+
+  remove(QuestionData question, Function notify){
+    questions.remove(question);
+    _cardsFromData(notify);
   }
 }
+
+HomeQuestions homeQuestions = HomeQuestions();
