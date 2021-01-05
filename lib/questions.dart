@@ -1,6 +1,7 @@
 class QuestionData {
   String question = '';
   String source = '';
+  int grade = 0;
   List<String> primaryTopics = [];
   List<String> secondaryTopics = [];
   DateTime completiondate = DateTime.utc(0);
@@ -16,6 +17,7 @@ class QuestionData {
     this.source = data['source'];
     this.primaryTopics = data['primaryTopics'];
     this.secondaryTopics = data['secondaryTopics'];
+    this.grade = data['grade'];
   }
   QuestionData(this.question);
 }

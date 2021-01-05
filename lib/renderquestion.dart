@@ -45,7 +45,7 @@ class _QuestionCardState extends State<QuestionCard> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Source: ' + question.source,
+                'Source: ' + question.source + ' (Grade ' + question.grade.toString() + ')',
                 style: TextStyle(color: Colors.white),
               ),
             )
