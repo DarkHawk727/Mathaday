@@ -15,6 +15,7 @@ class LaTex extends StatelessWidget {
     return DefaultTextStyle.merge(
       style: style,
       child: KaTeX(
+        delimiter: r'$$',
         laTeXCode: Text(processText(text), style: style),
       )
     );
