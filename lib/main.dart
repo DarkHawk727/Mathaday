@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:mathaday_app/bottomNavigationBar.dart';
-import 'package:mathaday_app/drawer.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'bottomNavigationBar.dart';
+import 'drawer.dart';
 import 'home.dart';
 import 'profile.dart';
+import 'loadingScreen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Mathaday',
-      theme: ThemeData(
-        textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white),
-        )
-      ),
-      home: Main(),
+    return FutureBuilder(
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot){
+        if (snapshot.hasError) return Text('There was a problem. Try again later');
+
+        if (snapshot.connectionState == ConnectionState.done)
+        return MaterialApp(
+          home: Main(),
+        );
+
+        return Loading();
+      },
     );
   }
 }
 
 class Main extends StatefulWidget {
-
   @override
   _MainState createState() => _MainState();
 }

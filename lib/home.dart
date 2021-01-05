@@ -8,14 +8,16 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   HomeQuestions _homeQuestions = HomeQuestions();
+  List<Widget> _questionCards = [];
 
   void initState() {
     super.initState();
     setupCards();
   }
 
-  setupCards(){
-
+  setupCards() async {
+    _questionCards = await _homeQuestions.getCards();
+    setState(() => _questionCards);
   }
 
   @override
@@ -23,7 +25,7 @@ class _HomeState extends State<Home> {
     return ListView(
       children: [
         Container(
-          child: PageView(children: _homeQuestions.getCards()),
+          child: PageView(children: _questionCards),
           height: 350,
         ),
         MaterialButton(

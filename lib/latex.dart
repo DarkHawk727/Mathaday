@@ -6,17 +6,13 @@ class LaTex extends StatelessWidget {
   final String text;
   final TextStyle style;
 
-  String processText(String text){
-    return (r'$ ' + text + r' $');
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle.merge(
       style: style,
       child: KaTeX(
         delimiter: r'$$',
-        laTeXCode: Text(processText(text), style: style),
+        laTeXCode: Text(text, style: style),
       )
     );
   }
