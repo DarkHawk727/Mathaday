@@ -28,6 +28,7 @@ class _QuestionCardState extends State<QuestionCard> {
           children: [
             Expanded(
               child: ListView(
+                physics: ClampingScrollPhysics(),
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(10.0),

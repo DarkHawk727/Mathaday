@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathaday_app/questions.dart';
 import 'renderquestion.dart';
 import 'homeQuestions.dart';
 
@@ -15,15 +16,12 @@ class _HomeState extends State<Home> {
   }
 
   setupCards() async {
+    if(homeQuestions.questions.isEmpty)
     await homeQuestions.getCards(update);
   }
 
   update(){
-    setState(() => homeQuestions.questions);
-    setState(() {
-      
-    });
-    print(homeQuestions.questions.map((e) => e.question));
+    setState((){});
   }
 
   @override
@@ -32,21 +30,23 @@ class _HomeState extends State<Home> {
     return ListView(
       children: [
         Container(
+          height: 350,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: homeQuestions.questions.length,
             itemBuilder: (BuildContext builder, int index){
+              QuestionData question = homeQuestions.questions[index];
               return Dismissible(
                 direction: DismissDirection.vertical,
-                key: Key(homeQuestions.questions[index].question),
+                onDismissed: (_) => homeQuestions.remove(question, update),
+                key: Key(question.question),
                 child: Container(
                   width: width,
-                  child: QuestionCard(homeQuestions.questions[index], update)
+                  child: QuestionCard(question, update)
                 )
               );
             },
           ),
-          height: 350,
         ),
         MaterialButton(
           onPressed: (){},
