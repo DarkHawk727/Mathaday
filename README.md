@@ -1,25 +1,26 @@
-# mathaday_app
+# Mathaday
 
-A new Flutter project.
+An Flutter app that lets you practise questions from various math contests. You get 3 new questions each day, and you can track your progress using statistics like streaks, percentage tried, best / weakest topics and most popular contests.
 
-## Getting Started
+# Rationale
+I just really wanted to see how building an app was like.
 
-This project is a starting point for a Flutter application.
+# What I learned
+* Flutter
+  * Layout
+  * Stateful and Stateless widgets
+  * Databases
+* Various Flutter packages
+  * fl_chart
+  * firestore
+  * katex_flutter
+* Basic LaTeX
+* 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-#To-do
-* Integrate userdata to graphs
-* Make UI Nicer
+# To-do
 * Add protips under each question card
-* add multiple choice and correct answer
 * add a open camera feature for short answer questions
 * Add more questions
 * Animations
 * Login Screen
+* Add notifications (like duolingo lmao)
