@@ -13,7 +13,7 @@ class HomeDrawer extends StatelessWidget {
       child: Container(
         color: Colors.grey[850],
         child: ListView(
-          children: <Widget>[] + userData.previousQuestions.reversed.map((e) => Container(
+          children: <Widget>[] + userData.previousQuestions.where((e) => e.correct).toList().reversed.map((e) => Container(
             child: QuestionCard(e, update),
             height: 400,
           )).toList(),

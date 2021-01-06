@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
 import 'userdata.dart';
 
 class Profile extends StatefulWidget {
@@ -8,6 +9,42 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  List<PieChartSectionData> contestChartData = [];
+  List<BarChartGroupData> streakChartData = [];
+  List<String> abbrev = [];
+
+  @override
+  initState(){
+    super.initState();
+    setupContestData();
+    setupStreakData();
+  }
+  
+  setupContestData(){
+    userData.contests.forEach((key, value) {
+      contestChartData.add(
+        PieChartSectionData(
+          title: key,
+          value: value.toDouble()
+        )
+      );
+    });
+  }
+
+  setupStreakData(){
+    userData.streak.forEach((key, value) {
+      streakChartData.add(
+        BarChartGroupData(x: streakChartData.length, barRods: [BarChartRodData(y: value.toDouble())])
+      );
+      abbrev.add(DateFormat('E').format(DateTime.parse(key)));
+    });
+  }
+
+  String getTitle(double val){
+    print(val.toInt());
+    return abbrev[val.toInt()];
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -55,9 +92,9 @@ class _ProfileState extends State<Profile> {
           child: PieChart(
             PieChartData(sections: [
               PieChartSectionData(
-                  value: 70.0, title: 'Correct', color: Colors.green[800]),
+                  value: userData.percentagecorrect, title: 'Correct', color: Colors.green[800]),
               PieChartSectionData(
-                value: 30.0,
+                value: 100 - userData.percentagecorrect,
                 title: "Incorrect",
               )
             ]),
@@ -69,10 +106,22 @@ class _ProfileState extends State<Profile> {
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
         ),
-        Center(
-          child: BarChart(BarChartData(barGroups: [
-            BarChartGroupData(x: 10, barRods: [BarChartRodData(y: 10)])
-          ])),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: BarChart(
+              BarChartData(
+                titlesData: FlTitlesData(
+                  show: true,
+                  bottomTitles: SideTitles(
+                    showTitles: true,
+                    getTitles: getTitle,
+                  )
+                ),
+                barGroups: streakChartData
+              )
+            ),
+          ),
         ),
         Center(
           child: Text(
@@ -83,11 +132,7 @@ class _ProfileState extends State<Profile> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: PieChart(
-            PieChartData(sections: [
-              PieChartSectionData(
-                  value: 70.0, title: 'Fermat', color: Colors.green[800]),
-              PieChartSectionData(value: 30.0, title: 'CSMC')
-            ]),
+            PieChartData(sections: contestChartData),
           ),
         ),
       ],

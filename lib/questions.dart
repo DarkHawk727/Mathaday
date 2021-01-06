@@ -16,7 +16,9 @@ class QuestionData {
     correct = _check(response);
     answer = response;
     completion = true;
+    completiondate = DateTime.now();
     _addToPrevious();
+    userData.calculateData();
     homeQuestions.remove(this, notify);
     return correct;
   }
@@ -48,6 +50,7 @@ class MultipleChoice extends QuestionData {
     options = Map<String, bool>.from(data['options']),
     super.data(data);
   
+  @override
   bool _check(String option){
     return options[option];
   }

@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
       children: [
         Container(
           height: 350,
-          child: ListView.builder(
+          child: (homeQuestions.questions.isNotEmpty) ? ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: homeQuestions.questions.length,
             itemBuilder: (BuildContext builder, int index){
@@ -46,10 +46,10 @@ class _HomeState extends State<Home> {
                 )
               );
             },
-          ),
+          ) : Center(child: Text("Looks like you've reached the end", style: TextStyle(color: Colors.white, fontSize: 20),))
         ),
         MaterialButton(
-          onPressed: (){},
+          onPressed: setupCards,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -53,10 +53,14 @@ class _MultipleChoiceResponseState extends State<MultipleChoiceResponse> {
   }
 
   Widget _createOptionWidget(String option){
+    Color buttonColor = question.completion ? (question.options[option] ? Colors.green : Colors.red) : Colors.white;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
+        color: buttonColor,
+        colorBrightness: Brightness.light,
         onPressed: (){
+          if(!question.completion)
           question.answered(option, notify);
         },
         child: LaTex(option),
