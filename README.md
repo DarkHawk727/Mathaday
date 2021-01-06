@@ -15,7 +15,6 @@ I just really wanted to see how building an app was like.
   * firestore
   * katex_flutter
 * Basic LaTeX
-* 
 
 # To-do
 * Add protips under each question card
