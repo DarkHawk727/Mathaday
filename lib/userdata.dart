@@ -21,13 +21,17 @@ class UserData {
   Future<void> getData() async {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     Map<String, dynamic> data = await Database().getUserData(firebaseAuth.currentUser);
+    userData.averageDailyScore = data['averageDailyScore'];
+    userData.percentagecorrect = data['percentageCorrect'];
+    print(userData.percentagecorrect);
+    userData.contests = new Map<String, int>.from(data['contests']);
   }
 
   Future<void> setData() async {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     Database().setData({
       'contests': userData.contests,
-      'percentCorrect': userData.percentagecorrect,
+      'percentageCorrect': userData.percentagecorrect,
       'averageDailyScore': userData.averageDailyScore
     }, 'users', firebaseAuth.currentUser.uid);
   }

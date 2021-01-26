@@ -94,7 +94,7 @@ class _ProfileState extends State<Profile> {
               PieChartSectionData(
                   value: userData.percentagecorrect, title: 'Correct', color: Colors.green[800]),
               PieChartSectionData(
-                value: 100 - userData.percentagecorrect,
+                value: 100.0 - (userData.percentagecorrect ?? 100),
                 title: "Incorrect",
               )
             ]),
