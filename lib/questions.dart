@@ -1,3 +1,4 @@
+import 'package:mathaday_app/firebaseuser.dart';
 import 'package:mathaday_app/homeQuestions.dart';
 import 'package:mathaday_app/userdata.dart';
 
@@ -20,6 +21,7 @@ class QuestionData {
     _addToPrevious();
     userData.calculateData();
     homeQuestions.remove(this, notify);
+    userData.setData();
     return correct;
   }
 

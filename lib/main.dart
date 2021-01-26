@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:mathaday_app/firebaseuser.dart';
+import 'package:mathaday_app/userdata.dart';
 
+import 'firebaseuser.dart';
 import 'bottomNavigationBar.dart';
 import 'drawer.dart';
 import 'home.dart';
@@ -22,7 +23,6 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           home: Main(),
         );
-
         return Loading();
       },
     );
@@ -33,8 +33,8 @@ Future<void> initSetup() async {
   await Firebase.initializeApp();
   final firebaseAuth = FirebaseAuth.instance;
   if (firebaseAuth.currentUser == null)
-  await FirebaseSignIn().signInAnonymously();
-  print(firebaseAuth.currentUser.uid);
+  await FirebaseUser().signInAnonymously();
+  userData.getData();
 }
 
 class Main extends StatefulWidget {

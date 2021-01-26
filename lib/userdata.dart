@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'questions.dart';
 import 'package:intl/intl.dart';
+import 'firestore.dart';
 
 ///im not mark zuckerberg im not stealing ur data lol
 class UserData {
@@ -14,6 +17,20 @@ class UserData {
   double xp = 0.0;
   List<QuestionData> previousQuestions = [];
   Map<String, int> streak = {};
+
+  Future<void> getData() async {
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    Map<String, dynamic> data = await Database().getUserData(firebaseAuth.currentUser);
+  }
+
+  Future<void> setData() async {
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    Database().setData({
+      'contests': userData.contests,
+      'percentCorrect': userData.percentagecorrect,
+      'averageDailyScore': userData.averageDailyScore
+    }, 'users', firebaseAuth.currentUser.uid);
+  }
 
   void calculateData() {
     _calculateAverageDailyScore();
@@ -59,3 +76,4 @@ class UserData {
 }
 
 UserData userData = UserData();
+
