@@ -22,8 +22,9 @@ environment:
 
 dependencies:
   intl: ^0.16.1
-  cloud_firestore: ^0.14.4
-  firebase_core: ^0.5.3
+  firebase_auth: ^0.20.0+1
+  cloud_firestore: ^0.16.0
+  firebase_core: ^0.7.0
   katex_flutter: ^4.0.1
   fl_chart: ^0.12.2
   flutter:

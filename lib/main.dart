@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mathaday_app/firebaseuser.dart';
 
 import 'bottomNavigationBar.dart';
 import 'drawer.dart';
@@ -13,10 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Firebase.initializeApp(),
+      future: initSetup(),
       builder: (context, snapshot){
         if (snapshot.hasError) return Text('There was a problem. Try again later');
-
         if (snapshot.connectionState == ConnectionState.done)
         return MaterialApp(
           home: Main(),
@@ -26,6 +27,14 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+Future<void> initSetup() async {
+  await Firebase.initializeApp();
+  final firebaseAuth = FirebaseAuth.instance;
+  if (firebaseAuth.currentUser == null)
+  await FirebaseSignIn().signInAnonymously();
+  print(firebaseAuth.currentUser.uid);
 }
 
 class Main extends StatefulWidget {
