@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mathaday_app/response.dart';
 import 'questions.dart';
 import 'latex.dart';
-import 'homeQuestions.dart';
 
 class QuestionCard extends StatefulWidget {
   QuestionCard(this.question, this.notify);

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mathaday_app/latex.dart';
 import 'questions.dart';
 
+//Returns a widget that contains input for given question
+
 class Response extends StatefulWidget {
   Response(this.question, this.notify);
   final QuestionData question;

@@ -10,8 +10,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   List<PieChartSectionData> contestChartData = [];
-  List<BarChartGroupData> streakChartData = [];
-  List<String> abbrev = [];
+  List<Streak> streaks = [];
 
   @override
   initState(){
@@ -33,16 +32,18 @@ class _ProfileState extends State<Profile> {
 
   setupStreakData(){
     userData.streak.forEach((key, value) {
-      streakChartData.add(
-        BarChartGroupData(x: streakChartData.length, barRods: [BarChartRodData(y: value.toDouble())])
+      streaks.add(
+        Streak()
+        ..date = key
+        ..y = value.toDouble()
       );
-      abbrev.add(DateFormat('E').format(DateTime.parse(key)));
     });
+    streaks.sort((a, b) => a.date.compareTo(b.date));
+    for (int i = 0; i < streaks.length; i++) streaks[i].x = i;
   }
 
   String getTitle(double val){
-    print(val.toInt());
-    return abbrev[val.toInt()];
+    return DateFormat('E').format(DateTime.parse(streaks[val.toInt()].date));
   }
 
   @override
@@ -92,9 +93,9 @@ class _ProfileState extends State<Profile> {
           child: PieChart(
             PieChartData(sections: [
               PieChartSectionData(
-                  value: userData.percentagecorrect, title: 'Correct', color: Colors.green[800]),
+                  value: userData.percentageCorrect, title: 'Correct', color: Colors.green[800]),
               PieChartSectionData(
-                value: 100 - userData.percentagecorrect,
+                value: 100.0 - userData.percentageCorrect,
                 title: "Incorrect",
               )
             ]),
@@ -118,7 +119,7 @@ class _ProfileState extends State<Profile> {
                     getTitles: getTitle,
                   )
                 ),
-                barGroups: streakChartData
+                barGroups: streaks.map((e) => e.data()).toList()
               )
             ),
           ),
@@ -137,5 +138,16 @@ class _ProfileState extends State<Profile> {
         ),
       ],
     );
+  }
+}
+
+
+class Streak{
+  String date = '';
+  int x = 0;
+  double y = 0;
+
+  BarChartGroupData data(){
+    return BarChartGroupData(x: x, barRods: [BarChartRodData(y: y)]);
   }
 }

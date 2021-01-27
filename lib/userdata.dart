@@ -1,19 +1,47 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'questions.dart';
 import 'package:intl/intl.dart';
+import 'firestore.dart';
 
 ///im not mark zuckerberg im not stealing ur data lol
 class UserData {
   double averageDailyScore = 0.0;
-  double percentagecorrect = 0.0;
+  double percentageCorrect = 0.0;
   int questionsCorrect = 0;
   int questionsIncorrect = 0;
   Map<String, int> contests = {};
-  int longestStreak = 0;
-  String favoriteTopic1 = '';
-  String favoriteTopic2 = '';
-  double xp = 0.0;
+  //int longestStreak = 0;
+  //String favoriteTopic1 = '';
+  //String favoriteTopic2 = '';
+  //double xp = 0.0;
   List<QuestionData> previousQuestions = [];
   Map<String, int> streak = {};
+
+  Future<void> getData() async {
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    Map<String, dynamic> data = await Database().getUserData(firebaseAuth.currentUser);
+    userData.averageDailyScore = data['averageDailyScore'] ?? 0;
+    userData.percentageCorrect = data['percentageCorrect'] ?? 0;
+    userData.contests = new Map<String, int>.from(data['contests'] ?? {}) ?? {};
+    userData.streak = new Map<String, int>.from(data['streak'] ?? {}) ?? {};
+    userData.previousQuestions = new List<QuestionData>.from(data['previousQuestions'].map((e) => createQuestion(e)).toList());
+  }
+
+  List<Map<String, dynamic>> _previousQuestionsMap() {
+    return previousQuestions.map((e) => e.createMap()).toList();
+  }
+
+  Future<void> setData() async {
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    Database().setData({
+      'contests': userData.contests,
+      'percentageCorrect': userData.percentageCorrect,
+      'averageDailyScore': userData.averageDailyScore,
+      'previousQuestions': _previousQuestionsMap(),
+      'streak': streak
+    }, 'users', firebaseAuth.currentUser.uid);
+  }
 
   void calculateData() {
     _calculateAverageDailyScore();
@@ -27,7 +55,7 @@ class UserData {
 
   void _calculatePercentageCorrect() {
     if(previousQuestions.length > 0)
-    percentagecorrect = questionsCorrect / (questionsCorrect + questionsIncorrect) * 100;
+    percentageCorrect = questionsCorrect / (questionsCorrect + questionsIncorrect) * 100;
   }
 
   void _calculateCorrectIncorrect(){
@@ -59,3 +87,4 @@ class UserData {
 }
 
 UserData userData = UserData();
+
