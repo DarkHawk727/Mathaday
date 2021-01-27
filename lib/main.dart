@@ -14,13 +14,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Firebase.initializeApp(),
-      builder: (context, snapshot){
-        if (snapshot.hasError) return Text('There was a problem. Try again later');
+      builder: (context, snapshot) {
+        if (snapshot.hasError)
+          return Text('There was a problem. Try again later');
 
         if (snapshot.connectionState == ConnectionState.done)
-        return MaterialApp(
-          home: Main(),
-        );
+          return MaterialApp(
+            home: Main(),
+          );
 
         return Loading();
       },
@@ -43,14 +44,13 @@ class _MainState extends State<Main> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[850],
-      appBar: AppBar(
-        title: const Text('Mathaday'),
-        backgroundColor: Colors.red[800],
-      ),
-      drawer: HomeDrawer(),
-      body: _views.elementAt(_selectedIndex),
-      bottomNavigationBar: HomeNavBar(_onItemTap, _selectedIndex)
-    );
+        backgroundColor: Colors.grey[850],
+        appBar: AppBar(
+          title: const Text('Mathaday'),
+          backgroundColor: Colors.red[800],
+        ),
+        drawer: HomeDrawer(),
+        body: _views.elementAt(_selectedIndex),
+        bottomNavigationBar: HomeNavBar(_onItemTap, _selectedIndex));
   }
 }
