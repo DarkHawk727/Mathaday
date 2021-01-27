@@ -6,7 +6,11 @@ class Database {
 
   Future<List<Map<String, dynamic>>> getAllQuestions(){
     return instance.collection('questions').get().then((QuerySnapshot querySnapshot){
-      return querySnapshot.docs.map((e) => e.data()).toList();
+      return querySnapshot.docs.map((e){
+        Map<String, dynamic> _data = e.data();
+        _data.addAll({'id': e.id});
+        return _data;
+      }).toList();
     });
   }
 
@@ -17,6 +21,6 @@ class Database {
   }
 
   Future<void> setData(data, String collection, String doc) {
-    instance.collection(collection).doc(doc).set(data, SetOptions(merge: true));
+    return instance.collection(collection).doc(doc).set(data, SetOptions(merge: true));
   }
 }

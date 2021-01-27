@@ -9,6 +9,7 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    userData.previousQuestions.where((e) => e.correct).toList();
     return Drawer(
       child: Container(
         color: Colors.grey[850],

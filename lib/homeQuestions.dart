@@ -1,5 +1,3 @@
-import 'package:mathaday_app/userdata.dart';
-
 import 'questions.dart';
 import 'renderquestion.dart';
 import 'firestore.dart';

@@ -35,6 +35,7 @@ Future<void> initSetup() async {
   if (firebaseAuth.currentUser == null)
   await FirebaseUser().signInAnonymously();
   userData.getData();
+  userData.calculateData();
 }
 
 class Main extends StatefulWidget {

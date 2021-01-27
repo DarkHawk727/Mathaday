@@ -1,8 +1,10 @@
-import 'package:mathaday_app/firebaseuser.dart';
 import 'package:mathaday_app/homeQuestions.dart';
 import 'package:mathaday_app/userdata.dart';
+import 'firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class QuestionData {
+  String id = '';
   String question = '';
   String source = '';
   int grade = 0;
@@ -33,12 +35,28 @@ class QuestionData {
     userData.previousQuestions.add(this);
   }
 
+  Map<String, dynamic> createMap() {
+    return {
+    'id': this.id,
+    'question': this.question,
+    'completion': this.completion,
+    'completiondate': this.completiondate,
+    'answer': this.answer,
+    'correct': this.correct,
+    'primaryTopics': this.primaryTopics,
+    'secondaryTopics': this.secondaryTopics,
+    'source': this.source,
+    'grade': this.grade,
+    };
+  }
+
   QuestionData.data(data){
-    this.question = data['question'];
-    this.source = data['source'];
-    this.primaryTopics = data['primaryTopics'];
-    this.secondaryTopics = data['secondaryTopics'];
-    this.grade = data['grade'];
+    this.id = data['id'] ?? '';
+    this.question = data['question'] ?? '';
+    this.source = data['source'] ?? '';
+    this.primaryTopics = new List<String>.from(data['primaryTopics'] ?? []);
+    this.secondaryTopics = new List<String>.from(data['secondaryTopics'] ?? []);
+    this.grade = data['grade'] ?? 0;
   }
 }
 
@@ -55,6 +73,23 @@ class MultipleChoice extends QuestionData {
   @override
   bool _check(String option){
     return options[option];
+  }
+
+  @override
+  Map<String, dynamic> createMap() {
+    return {
+    'id': this.id,
+    'question': this.question,
+    'completion': this.completion,
+    'completiondate': this.completiondate,
+    'answer': this.answer,
+    'correct': this.correct,
+    'primaryTopics': this.primaryTopics,
+    'secondaryTopics': this.secondaryTopics,
+    'source': this.source,
+    'options': this.options,
+    'grade': this.grade,
+    };
   }
 }
 
