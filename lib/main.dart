@@ -35,7 +35,7 @@ Future<void> initSetup() async {
   final firebaseAuth = FirebaseAuth.instance;
   if (firebaseAuth.currentUser == null)
     await FirebaseUser().signInAnonymously();
-  userData.getData();
+  await userData.getData();
   userData.calculateData();
 }
 

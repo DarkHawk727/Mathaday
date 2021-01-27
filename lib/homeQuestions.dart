@@ -1,3 +1,5 @@
+import 'package:mathaday_app/userdata.dart';
+
 import 'questions.dart';
 import 'renderquestion.dart';
 import 'firestore.dart';
@@ -15,6 +17,7 @@ class HomeQuestions{
 
   getCards(Function notify) async {
     this.questions = await _loadData();
+    questions.removeWhere((e) => userData.previousQuestions.where((e1) => e1.correct).map((e2) => e2.id).contains(e.id));
     _cardsFromData(notify);
   }
 

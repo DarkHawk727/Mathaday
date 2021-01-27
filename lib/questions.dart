@@ -1,6 +1,5 @@
 import 'package:mathaday_app/homeQuestions.dart';
 import 'package:mathaday_app/userdata.dart';
-import 'firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class QuestionData {
@@ -57,6 +56,13 @@ class QuestionData {
     this.primaryTopics = new List<String>.from(data['primaryTopics'] ?? []);
     this.secondaryTopics = new List<String>.from(data['secondaryTopics'] ?? []);
     this.grade = data['grade'] ?? 0;
+    
+    //From Online
+    this.correct = data['correct'] ?? false;
+    this.answer = data['answer'] ?? '';
+    this.completion = data['completion'] ?? false;
+    //Timestamp compdate = data['completiondate'];
+    //this.completiondate = compdate.toDate() ?? DateTime.now();
   }
 }
 
