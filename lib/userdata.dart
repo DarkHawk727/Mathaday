@@ -25,7 +25,7 @@ class UserData {
     userData.percentageCorrect = data['percentageCorrect'] ?? 0;
     userData.contests = new Map<String, int>.from(data['contests'] ?? {}) ?? {};
     userData.streak = new Map<String, int>.from(data['streak'] ?? {}) ?? {};
-    userData.previousQuestions = new List<QuestionData>.from(data['previousQuestions'].map((e) => createQuestion(e)).toList());
+    userData.previousQuestions = new List<QuestionData>.from((data['previousQuestions'] ?? []).map((e) => createQuestion(e)).toList());
   }
 
   List<Map<String, dynamic>> _previousQuestionsMap() {
@@ -34,7 +34,8 @@ class UserData {
 
   Future<void> setData() async {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-    Database().setData({
+    await Database().setData({'previousQuestions': []}, 'users', firebaseAuth.currentUser.uid);
+    await Database().setData({
       'contests': userData.contests,
       'percentageCorrect': userData.percentageCorrect,
       'averageDailyScore': userData.averageDailyScore,
@@ -82,7 +83,6 @@ class UserData {
       streak[_format.format(previousQuestions[i].completiondate)] += 1;
       i++;
     }
-    print(streak);
   }
 }
 
