@@ -16,6 +16,7 @@ class HomeQuestions{
   }
 
   getCards(Function notify) async {
+    this.questions.clear();
     this.questions = await _loadData();
     questions.removeWhere((e) => userData.previousQuestions.where((e1) => e1.correct).map((e2) => e2.id).contains(e.id));
     _cardsFromData(notify);

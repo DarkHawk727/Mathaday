@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   }
 
   setupCards() async {
-    if(homeQuestions.questions.isEmpty)
+    //if(homeQuestions.questions.isEmpty)
     await homeQuestions.getCards(update);
   }
 
