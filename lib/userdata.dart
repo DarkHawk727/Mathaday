@@ -20,12 +20,14 @@ class UserData {
 
   Future<void> getData() async {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-    Map<String, dynamic> data = await Database().getUserData(firebaseAuth.currentUser);
+    if(firebaseAuth.currentUser != null) {
+    Map<String, dynamic> data = await Database().getUserData(firebaseAuth.currentUser) ?? {};
     userData.averageDailyScore = data['averageDailyScore'] ?? 0;
     userData.percentageCorrect = data['percentageCorrect'] ?? 0;
     userData.contests = new Map<String, int>.from(data['contests'] ?? {}) ?? {};
     userData.streak = new Map<String, int>.from(data['streak'] ?? {}) ?? {};
     userData.previousQuestions = new List<QuestionData>.from((data['previousQuestions'] ?? []).map((e) => createQuestion(e)).toList());
+    }
   }
 
   List<Map<String, dynamic>> _previousQuestionsMap() {
