@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "dart:math";
+import 'package:mathaday_app/userdata.dart';
 
 class Database {
   FirebaseFirestore instance = FirebaseFirestore.instance;
@@ -18,6 +19,7 @@ class Database {
           _data.addAll({'id': e.id});
           return _data;
         }).toList();
+        questions.removeWhere((element) => userData.previousQuestions.contains(element));
       });
       grades.remove(grade);
     }
